@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class User : MonoBehaviour{
 
+    private string username {get; set;}
+    private int star_dust {get; set;}
+    private Sky sky {get; set;}
 
     public User(){
-        username = '';
+        username = "";
         sky = new Sky();
         star_dust = -1;
 
@@ -12,17 +15,9 @@ public class User : MonoBehaviour{
 
 
 
-
-
     public void login(){
         // will be the login method.
         // For the moment we can mock a user for test purpose
-
-    }
-
-    public Sky getUserSky(){
-
-        // The user's sky will cotain all the star the user posses
 
     }
 
