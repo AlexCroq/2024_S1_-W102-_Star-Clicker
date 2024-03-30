@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "StarClicker.sln"
+    "dotnet.defaultSolution": "2024_S1_-W102-_Star-Clicker.sln"
 }
