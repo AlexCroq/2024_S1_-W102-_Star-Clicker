@@ -15,19 +15,22 @@ public class User : MonoBehaviour{
 
 
 
-    public void login(){
+    public void Login(){
         // will be the login method.
         // For the moment we can mock a user for test purpose
 
     }
 
-    public void buyStar(){
+    #region starManagement
+
+    public void BuyStar(){
         // for @Giang 
     }
 
-    public void sellStar(){
+    public void SellStar(){
         // for @Giang 
     }
 
+    #endregion
 
 }
