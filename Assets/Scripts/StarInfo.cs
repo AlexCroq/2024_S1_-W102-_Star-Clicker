@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-//using TMPro;
+using TMPro;
 
 public class StarInfo : MonoBehaviour
 {   [System.Serializable]
@@ -19,8 +19,8 @@ public class StarInfo : MonoBehaviour
         public string extract;
     }
 
-    //[SerializeField] private TextMeshProUGUI _StarNumber;
-    //[SerializeField] private TextMeshProUGUI _StarDescription;
+    [SerializeField] private TextMeshProUGUI _StarNumber;
+    [SerializeField] private TextMeshProUGUI _StarDescription;
 
     
     public IEnumerator GetWikipediaPage(float catalog_number,Action<string> onSuccess, Action<string> onError){
