@@ -16,6 +16,8 @@ public class CardScript : MonoBehaviour
    public Button sellBtn;
    private User currentUser;
 
+   public GameObject canvasPrefab;
+
     public void Awake(){
         currentUser = loadUser();
         purchaseBtn.onClick.AddListener(OnPurchase);
@@ -59,7 +61,6 @@ public class CardScript : MonoBehaviour
         }
 
     }
-
     
 
     private void setPrice(int id){

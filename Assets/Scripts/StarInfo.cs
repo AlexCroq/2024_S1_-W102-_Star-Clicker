@@ -18,54 +18,40 @@ public class StarInfo : MonoBehaviour
     {
         public string extract;
     }
+    private string starDescription;
+    private List<Star> stars;  
 
-    [SerializeField] private TextMeshProUGUI _StarNumber;
-    [SerializeField] private TextMeshProUGUI _StarDescription;
-
-    
     public IEnumerator GetWikipediaPage(float catalog_number,Action<string> onSuccess, Action<string> onError){
-    //Build the full URL
-    string fullUrl ="https://en.wikipedia.org/api/rest_v1/page/summary/HR_" + catalog_number;
-    
+        string fullUrl ="https://en.wikipedia.org/api/rest_v1/page/summary/HR_" + catalog_number;
+        UnityWebRequest request = UnityWebRequest.Get(fullUrl);
+        // send the request
+        yield return request.SendWebRequest();
+        // Error check
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            string fastDescription = "This star is named HR " + catalog_number;
+            onError?.Invoke(fastDescription);
+            yield break;
+        }
 
-    // Create the request
-    UnityWebRequest request = UnityWebRequest.Get(fullUrl);
-
-    // send the request
-    yield return request.SendWebRequest();
-
-    // Error check
-    if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-    {
-        string fastDescription = "This star is named HR "+catalog_number;
-        onError?.Invoke(fastDescription);
-        yield break;
+        WikipediaResponse response = JsonUtility.FromJson<WikipediaResponse>(request.downloadHandler.text);
+        string starDescription = response.extract;
+        onSuccess?.Invoke(starDescription);
     }
 
-    
-
-    WikipediaResponse response = JsonUtility.FromJson<WikipediaResponse>(request.downloadHandler.text);
-    string starDescription = response.extract;
-    onSuccess?.Invoke(starDescription);
-    }
-
-    public void FetchStarDescription(float catalog_number)
-    {
+    public void FetchStarDescription(float catalog_number){
         StartCoroutine(GetWikipediaPage(catalog_number,OnStarDescriptionReceived, OnStarDescriptionError));
     }
 
 
-    private void OnStarDescriptionReceived(string description)
-    {
-        Debug.Log(description);
+    private void OnStarDescriptionReceived(string description){
+        starDescription = description;
     }   
 
-    private void OnStarDescriptionError(string fastDescription)
-    {
-        Debug.Log(fastDescription);
+    private void OnStarDescriptionError(string fastDescription){
+        starDescription = fastDescription;
     }
-    private List<Star> stars;
-    private string descr;
+
     public void GetStarInfo(float starNumber){
         // Loading the skymap
         StarDataLoader sdl = new();
@@ -78,10 +64,8 @@ public class StarInfo : MonoBehaviour
         }
     }
 
-    
-
-    void Start(){
-        GetStarInfo(4555);
+    public string GetStringStarInfo(float starNumber){
+        GetStarInfo(starNumber);
+        return starDescription;
     }
-
 }

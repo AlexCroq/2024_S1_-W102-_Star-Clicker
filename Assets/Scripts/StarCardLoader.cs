@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using Codice.Client.Selector;
 using System.Threading;
 using TMPro;
+using UnityEngine.EventSystems;
+using System;
 
 public class StarCardLoader : MonoBehaviour
 {
     public GameObject cardPrefab;
+    public GameObject starInfoPrefab;
     public Transform contentArea;
     public List<int> starsIDList; // List of your star data
 
@@ -22,6 +25,7 @@ public class StarCardLoader : MonoBehaviour
     {
         currentUser = loadUser();
         refreshContent();
+        
     }
     private void refreshContent(){
         RemoveAllCards();
@@ -44,10 +48,26 @@ public class StarCardLoader : MonoBehaviour
             CardScript cardScript = card.GetComponent<CardScript>();
             cardScript.setCardData(starID);
             totalHeight += cardRectTransform.sizeDelta.y + spacing;
+
+            // Adding listeners on cards click 
+            EventTrigger eventTrigger = card.AddComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerClick;
+            entry.callback.AddListener((data) => {OnCardClicked(starID);});
+            eventTrigger.triggers.Add(entry);
+
         }
 
         RectTransform contentRectTransform = contentArea.GetComponent<RectTransform>();
         contentRectTransform.sizeDelta = new Vector2(contentRectTransform.sizeDelta.x, totalHeight);
+    }
+
+    private void OnCardClicked(int starID)
+    {
+        GameObject starCard = Instantiate(starInfoPrefab, transform.position, Quaternion.identity);
+        starInfoScript infoCardScript = starCard.GetComponent<starInfoScript>();
+        infoCardScript.setCardData(starID);
+
     }
 
     private void RemoveAllCards()
