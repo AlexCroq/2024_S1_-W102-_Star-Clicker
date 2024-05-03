@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/StarInfo.cs.meta
-guid: 667307758839ab14c83bb018c6028347
-========
-guid: dc949dd3a025d4ffc8091d3d380f817f
->>>>>>>> main:Assets/Scripts/Clicker.cs.meta
+guid: 64a9da0d5fd0eea44b24b1dc800d5c5c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
