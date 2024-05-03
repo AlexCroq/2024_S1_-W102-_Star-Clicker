@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SkyStar.unity
     guid: 74e33504d00017f469aa465d7b210505
   - enabled: 0
-    path: Assets/Scenes/ClickerScen.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/ClickerScene2.unity
+    guid: 9f7e914ddfdf0a648b742f673ae90d3b
+  - enabled: 1
+    path: Assets/Scenes/InventoryScene1.unity
+    guid: 3a16463ba7ad9ba488e8c7522510d770
+  - enabled: 1
+    path: Assets/Scenes/InventoryScene.unity
+    guid: f8052551b37aa1f41aa3df8a32018aec
   m_configObjects: {}
