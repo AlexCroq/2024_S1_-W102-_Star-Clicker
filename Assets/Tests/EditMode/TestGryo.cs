@@ -8,15 +8,22 @@ public class GyroControlTests
     {
         GyroControl gyroControl = new GameObject().AddComponent<GyroControl>();
 
-        Quaternion mockGyroAttitude = new  Quaternion(1.1f, 1.1f, 1.1f, 1.1f);
-        Quaternion mockCoordinates = new  Quaternion(1.1f, 1.1f, 1.1f, 1.1f);
+        Vector3 mockGyroAttitude = new  Vector3(1.1f, 1.1f, 1.1f);
+        Vector3 mockCoordinates = new  Vector3(1.1f, 1.1f, 1.1f);
 
-        Quaternion result = gyroControl.CalibratedRotation(mockCoordinates,mockGyroAttitude);
+        Vector3 result = gyroControl.CalibratedRotation(mockCoordinates,mockGyroAttitude);
 
-        //No calibration Test
-        Quaternion expected = new Quaternion(0f, 0f, 0f, 0f); 
+        //At calibrated point test
+        Vector3 expected = new Vector3(0f, 0f, 0f); 
         Assert.AreEqual(expected, result);
 
 
+        //No calibration Test
+        mockCoordinates = new  Vector3(0f, 0f, 0f);
+        mockGyroAttitude = new  Vector3(1.1f, 1.1f, 1.1f);
+
+        result = gyroControl.CalibratedRotation(mockCoordinates,mockGyroAttitude);
+        expected = mockGyroAttitude; 
+        Assert.AreEqual(expected, result);
     }
 }

@@ -24,7 +24,7 @@ public class GyroControl : MonoBehaviour
         cameraContainer = new GameObject("Camera Container");
         cameraContainer.transform.position = transform.position;
         transform.SetParent(cameraContainer.transform);
-        endCalibrationButton.onClick.AddListener(() => SetCalibration(false));
+        endCalibrationButton.onClick.AddListener(SetCalibration);
         gyroEnabled = EnableGyro();
 
     }
@@ -37,16 +37,16 @@ public class GyroControl : MonoBehaviour
             gyro.enabled = true;
             Debug.Log(gyro.attitude);
             // cameraContainer.transform.rotation = GetFixedPoint();
-            // rot = new Quaternion(0, 0, 1, 0);
+            rot = new Quaternion(0, 0, 1, 0);
             return true;
         }
         return false;
     }
 
-    private void SetCalibration(bool enabled){
+    private void SetCalibration(){
         calibratedCoordinates = gyro.attitude;
-        calibrationMode = enabled;
-        endCalibrationButton.gameObject.SetActive(enabled);
+        calibrationMode = !calibrationMode;
+        endCalibrationButton.gameObject.SetActive(!calibrationMode);
     }
 
     private Quaternion GetFixedPoint(){
@@ -113,15 +113,20 @@ public class GyroControl : MonoBehaviour
         else{
     if (gyroEnabled)
             {   
-                Quaternion gyroscope = gyro.attitude;
-                Quaternion currentRotation = CalibratedRotation(calibratedCoordinates, gyroscope);
-                cameraContainer.transform.rotation = currentRotation;
+                transform.localRotation = gyro.attitude * rot;
+                // TODO sprint 2 add gyro calibration.
             }
         }
     }
 
-    public Quaternion CalibratedRotation(Quaternion coordinates, Quaternion gyroscope)
-    {
-        return Quaternion.Inverse(coordinates) * gyroscope;
+    public Vector3 CalibratedRotation(Vector3 coordinates, Vector3 gyroscope){
+        
+        return new Vector3(
+            gyroscope.x - coordinates.x,
+            gyroscope.y - coordinates.y,
+            90-(gyroscope.z - coordinates.z)
+        );
     }
+
+
 }
