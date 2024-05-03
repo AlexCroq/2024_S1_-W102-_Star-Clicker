@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StarField : MonoBehaviour {
   [Range(0, 100)]
@@ -28,6 +29,21 @@ public class StarField : MonoBehaviour {
       material.SetFloat("_Size", Mathf.Lerp(starSizeMin, starSizeMax, star.size));
       material.color = star.colour;
       starObjects.Add(starObject);
+
+      EventTrigger eventTrigger = starObject.AddComponent<EventTrigger>();
+
+      // Add PointerClick event to trigger when the star is clicked
+      EventTrigger.Entry entry = new EventTrigger.Entry();
+      entry.eventID = EventTriggerType.PointerClick;
+      entry.callback.AddListener((data) => { OnStarClicked(star); });
+      eventTrigger.triggers.Add(entry);
+    }
+  }
+
+  private void OnStarClicked(Star star){
+    if(star.isToBeCollected()){
+      //TODO in Sprint 2 logic to collect star once bought (with users database)
+      Debug.Log($"Star HR {star.catalog_number} collected");
     }
   }
 }

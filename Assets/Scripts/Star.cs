@@ -10,6 +10,7 @@ using UnityEngine;
     private readonly double declination;
     private readonly float ra_proper_motion;
     private readonly float dec_proper_motion;
+    private bool toBeCollected = false;
 
     public Star(float catalog_number, double right_ascension, double declination, byte spectral_type,
                 byte spectral_index, short magnitude, float ra_proper_motion, float dec_proper_motion) {
@@ -87,5 +88,13 @@ using UnityEngine;
 
     public double GetDeclination() {
         return declination;
+    }
+
+    public void setToBeCollected(bool toBeCollected){
+      this.toBeCollected = toBeCollected;
+    }
+
+    public bool isToBeCollected(){
+      return toBeCollected;
     }
   }
