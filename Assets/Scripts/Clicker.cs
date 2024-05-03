@@ -12,11 +12,6 @@ public class Clicker : MonoBehaviour
     public float powerPerSecond = 1.0f;
     public TMP_Text powerText;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         powerText.text = "Total Star Dust: " + power;

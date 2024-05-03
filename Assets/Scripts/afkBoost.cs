@@ -26,11 +26,6 @@ public class afkBoost : MonoBehaviour
         }
     }
 
-    public void MainButtonPress()
-    {
-        power++;
-    }
-
     public void StartAutoHarvest()
     {
         autoHarvestActive = true;
