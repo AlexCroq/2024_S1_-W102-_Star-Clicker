@@ -5,33 +5,17 @@ using UnityEngine;
 public class User{
 
     private string username {get; set;}
+    private string password_hashed;
     private int star_dust {get; set;}
+    private int user_id;
+    private List<int> friendsList;
     private List<int> starIDList;
-
-    private List<Star> stars;
 
 
     public User(){
         username = "";
         starIDList = new List<int>();
         star_dust = -1;
-
-    }
-
-    public void LoadStar(){
-        StarDataLoader sdl = new();
-        stars = sdl.LoadData();
-        foreach(Star star in stars){
-            int idStar =(int)star.catalog_number;
-            starIDList.Add(idStar);
-        }  
-    }
-
-
-
-    public void Login(){
-        // will be the login method.
-        // For the moment we can mock a user for test purpose
 
     }
 
