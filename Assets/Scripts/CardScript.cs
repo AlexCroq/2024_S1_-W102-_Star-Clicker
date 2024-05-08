@@ -19,7 +19,7 @@ public class CardScript : MonoBehaviour
    public GameObject canvasPrefab;
 
     public void Awake(){
-        currentUser = loadUser();
+        currentUser = UserManager.currentUser;
         purchaseBtn.onClick.AddListener(OnPurchase);
         sellBtn.onClick.AddListener(OnSale);
    }
@@ -33,14 +33,6 @@ public class CardScript : MonoBehaviour
       currentUser.SellStar(id);
       setCardData(id);
    }
-
-    public User loadUser(){
-        // TODO implement in SPRINT 2
-        currentUser = new User();
-        currentUser.BuyStar(1);
-        currentUser.BuyStar(10);
-        return currentUser;
-    }
 
     public void setCardData(int starID){
         var IsOwned = currentUser.IsOwned(starID);

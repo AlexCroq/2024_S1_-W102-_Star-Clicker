@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class User{
 
-    private string username {get; set;}
-    private int star_dust {get; set;}
+    private string username;
+    private int star_dust;
     private List<int> starIDList;
 
     private List<Star> stars;
@@ -17,7 +17,6 @@ public class User{
         star_dust = -1;
 
     }
-
     public void LoadStar(){
         StarDataLoader sdl = new();
         stars = sdl.LoadData();

@@ -23,7 +23,7 @@ public class StarCardLoader : MonoBehaviour
 
     void Start()
     {
-        currentUser = loadUser();
+        currentUser = UserManager.currentUser;
         refreshContent();
         
     }
@@ -77,14 +77,6 @@ public class StarCardLoader : MonoBehaviour
             Destroy(child.gameObject);
         }
         totalHeight = 0f; // Reset total height after removing cards
-    }
-
-    private User loadUser(){
-        // TODO implement in SPRINT 2
-        currentUser = new User();
-        currentUser.BuyStar(1);
-        currentUser.BuyStar(10);
-        return currentUser;
     }
 
     private List<int> RandomizeShop(){
