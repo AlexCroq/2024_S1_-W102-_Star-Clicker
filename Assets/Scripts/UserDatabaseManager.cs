@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using Unity.Plastic.Newtonsoft.Json;
 
 public class UserDatabaseManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UserDatabaseManager : MonoBehaviour
 
     private List<User> users = new List<User>();
     private static UserDatabaseManager instance;
+    private User currentUser;
 
     public bool CurrentSaveStatus = false;
     void Start(){
@@ -124,6 +126,52 @@ public class UserDatabaseManager : MonoBehaviour
             return builder.ToString();
         }
     }
+    public IEnumerator UpdateUser(string username, int? starDust = null, List<string> friendsList = null, List<string> starIDList = null)
+    {
+        // Create the payload dictionary
+        Dictionary<string, object> payload = new Dictionary<string, object>
+        {
+            { "username", username },
+            { "action", "update_user" }
+        };
+
+        // Add optional parameters if they are not null
+        if (starDust.HasValue)
+        {
+            payload["star_dust"] = starDust.Value;
+        }
+        if (friendsList != null)
+        {
+            payload["friendsList"] = friendsList;
+        }
+        if (starIDList != null)
+        {
+            payload["starIDList"] = starIDList;
+        }
+
+        // Serialize payload to JSON
+        string jsonPayload = JsonConvert.SerializeObject(payload);
+
+        // Set up the request
+        UnityWebRequest request = new UnityWebRequest(userPhpScriptUrl, "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonPayload);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
+
+        // Send the request and wait for the response
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError($"Error: {request.responseCode}, {request.downloadHandler.text}");
+        }
+        else
+        {
+            Debug.Log("User updated successfully.");
+        }
+    }
 
     public User ConnectUser(string username, string password){
         return users.Find(u => u.username == username && CheckPassword(password, u.password_hashed));
@@ -142,6 +190,10 @@ public class UserDatabaseManager : MonoBehaviour
 
     public List<User> GetUsers(){
         return users;
+    }
+
+    public User getCurrentUser(){
+        return currentUser;
     }
 
     public bool CheckPassword(string inputPassword, string hashedPassword) => HashPassword(inputPassword) == hashedPassword;
