@@ -19,7 +19,7 @@ public class StarInfo : MonoBehaviour
         public string extract;
     }
     private string starDescription;
-    private List<Star> stars;  
+    private List<Star> stars;
 
     public IEnumerator GetWikipediaPage(float catalog_number,Action<string> onSuccess, Action<string> onError){
         string fullUrl ="https://en.wikipedia.org/api/rest_v1/page/summary/HR_" + catalog_number;
@@ -35,8 +35,8 @@ public class StarInfo : MonoBehaviour
         }
 
         WikipediaResponse response = JsonUtility.FromJson<WikipediaResponse>(request.downloadHandler.text);
-        string starDescription = response.extract;
-        onSuccess?.Invoke(starDescription);
+        string longDescription = response.extract;
+        onSuccess?.Invoke(longDescription);
     }
 
     public void FetchStarDescription(float catalog_number){
@@ -46,26 +46,23 @@ public class StarInfo : MonoBehaviour
 
     private void OnStarDescriptionReceived(string description){
         starDescription = description;
+        
     }   
 
     private void OnStarDescriptionError(string fastDescription){
         starDescription = fastDescription;
     }
 
-    public void GetStarInfo(float starNumber){
-        // Loading the skymap
-        StarDataLoader sdl = new();
-        stars = sdl.LoadData();
-        foreach (Star star in stars){
-            if(star.catalog_number==starNumber){
-            FetchStarDescription(starNumber);
-            return;
-            }
-        }
+
+    public void GetStringStarInfo(float starNumber){
+        FetchStarDescription(starNumber);
     }
 
-    public string GetStringStarInfo(float starNumber){
-        GetStarInfo(starNumber);
+    public String getStarDescription(){
         return starDescription;
+    }
+
+    public void setStarDescription(string description){
+        starDescription =description;
     }
 }

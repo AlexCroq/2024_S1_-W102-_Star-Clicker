@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Codice.Client.Common;
+using System.Data.Common;
+using System.Threading.Tasks;
 
 public class CardScript : MonoBehaviour
 {
@@ -18,6 +21,11 @@ public class CardScript : MonoBehaviour
 
    public GameObject canvasPrefab;
 
+   private int priceMin=10000000;
+
+   private int priceMax;
+
+
     public void Awake(){
         currentUser = UserManager.currentUser;
         purchaseBtn.onClick.AddListener(OnPurchase);
@@ -25,18 +33,19 @@ public class CardScript : MonoBehaviour
    }
 
     public void OnPurchase(){
-      currentUser.BuyStar(id);
-      setCardData(id);
+      BuyStar(Int32.Parse(idTxt.text));
+      setCardData(Int32.Parse(idTxt.text));
    }
 
     public void OnSale(){
-      currentUser.SellStar(id);
-      setCardData(id);
+      SellStar(Int32.Parse(idTxt.text));
+      setCardData(Int32.Parse(idTxt.text));
    }
 
     public void setCardData(int starID){
         var IsOwned = currentUser.IsOwned(starID);
         idTxt.text = starID.ToString();
+        id = Int32.Parse(idTxt.text);
         if(IsOwned){
             purchaseBtn.enabled = false;
             sellBtn.enabled = true;
@@ -62,12 +71,29 @@ public class CardScript : MonoBehaviour
         foreach (Star star in stars) {
             if (star.catalog_number == id){
                 flag = true;
-                price = id *61; // TODO change logic
+                price = (int)(star.size*10000);
             }
         }
+        
         if(!flag){
             price = -1;
         }
     }
+
+    public void BuyStar(int id){
+    if(!currentUser.IsOwned(id) & currentUser.getStar_dust()>price){
+        currentUser.AddStarIDList(id);
+        currentUser.setStar_dust(-price);
+        }
+    }
+
+    public void SellStar(int id){
+    if(currentUser.IsOwned(id)){
+        currentUser.RemoveStarIDList(id);
+        currentUser.setStar_dust((int)0.5*price);
+        }
+    }
+
+
 
 }

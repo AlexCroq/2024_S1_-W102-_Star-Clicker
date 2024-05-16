@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data.Common;
+using PlasticPipe.Tube;
 using UnityEngine;
 
 public class User{
@@ -10,12 +11,16 @@ public class User{
     private int user_id;
     private List<int> friendsList;
     private List<int> starIDList;
+    private CardScript cardScript = new CardScript();
+    private float starPower;
 
+  
 
     public User(){
         username = "";
         starIDList = new List<int>();
-        star_dust = -1;
+        star_dust = 0;
+        starPower = 1;
 
     }
 
@@ -30,16 +35,8 @@ public class User{
         return false;
     }
 
-    public void BuyStar(int id){
-        if(!IsOwned(id)){
-            starIDList.Add(id);
-        }
-    }
-
-    public void SellStar(int id){
-        if(IsOwned(id)){
-            starIDList.Remove(id);
-        }
+    public void AddScore(){
+        star_dust =star_dust + (int)starPower;
     }
 
     #endregion
@@ -48,4 +45,27 @@ public class User{
         return starIDList;
     }
 
+    public void AddStarIDList(int id){
+        starIDList.Add(id);
+    }
+
+    public void RemoveStarIDList(int id){
+        starIDList.Remove(id);
+    }
+
+    public int getStar_dust(){
+        return star_dust;
+    }
+
+    public void setStar_dust(int i){
+        star_dust += i;
+    }
+
+    public void setStarPower(float i){
+        starPower = i +1;
+    }
+
+    public float getStarPower(){
+        return starPower;
+    }
 }
