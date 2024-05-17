@@ -33,7 +33,6 @@ public class StarDataLoader {
       Star star = new(catalog_number, right_ascension, declination, spectral_type, spectral_index, magnitude, ra_proper_motion, dec_proper_motion);
       stars.Add(star);
     }
-
     return stars;
   }
 

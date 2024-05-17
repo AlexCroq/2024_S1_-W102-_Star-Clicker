@@ -163,6 +163,9 @@ namespace DevionGames.LoginSystem
 			if (saveSuccessful)
 			{
 				Debug.Log("User saved successfully!");
+				userDatabaseManager.setCurrentUser(id);
+				EventHandler.Execute("OnLogin");
+
 			}
 			else
 			{
@@ -196,6 +199,7 @@ namespace DevionGames.LoginSystem
 					PlayerPrefs.SetString(LoginManager.Server.accountKey, username);
 					if (LoginManager.DefaultSettings.debug)
 						Debug.Log("[LoginAccount] Login was successful!");
+					userDatabaseManager.setCurrentUser(username);
 					EventHandler.Execute("OnLogin");
 					yield break;
 				}
