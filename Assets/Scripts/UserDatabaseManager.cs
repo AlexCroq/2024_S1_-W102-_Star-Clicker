@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine.SocialPlatforms;
 
 public class UserDatabaseManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UserDatabaseManager : MonoBehaviour
 
     private List<User> users = new List<User>();
     private static UserDatabaseManager instance;
+    private User currentUser;
 
     public bool CurrentSaveStatus = false;
     void Start(){
@@ -144,6 +146,19 @@ public class UserDatabaseManager : MonoBehaviour
         return users;
     }
 
+    public User GetCurrentUser(){
+        return currentUser;
+    }
+
+    public void setCurrentUser(string username){
+        foreach(User user in users){
+            if (user.username == username){
+                currentUser = user;
+                break;
+            }
+        }
+    }
+    
     public bool CheckPassword(string inputPassword, string hashedPassword) => HashPassword(inputPassword) == hashedPassword;
 
 }

@@ -16,7 +16,7 @@ public class OfflineProgress : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("exitTime"))
         {
-            currentUser = UserManager.currentUser;
+            currentUser = UserDatabaseManager.Instance.GetCurrentUser();
             offlinePanel.SetActive(true);
             DateTime lastTime = DateTime.Parse(PlayerPrefs.GetString("exitTime"));
             DateTime currentTime = DateTime.Now;
@@ -29,7 +29,7 @@ public class OfflineProgress : MonoBehaviour
             float powerGain = clickerInstance.powerPerSecond * (float)timeAway.TotalSeconds;
             pointsGainedText.text = powerGain.ToString("0.00");
 
-            currentUser.setStar_dust((int)powerGain);
+            currentUser.increaseStarDust((int)powerGain);
         }
         else
         {

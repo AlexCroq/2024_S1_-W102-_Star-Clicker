@@ -13,7 +13,6 @@ public class User{
     public int user_id;
     public List<int> friendsList;
     public List<int> starIDList;
-    private CardScript cardScript = new CardScript();
     private float starPower;
 
 
@@ -37,7 +36,7 @@ public class User{
     }
 
     public void AddScore(){
-        star_dust =star_dust + (int)starPower;
+        star_dust =star_dust + (int)starPower*10000000;
     }
 
     #endregion
@@ -85,7 +84,7 @@ public class User{
         return star_dust;
     }
 
-    public void setStar_dust(int i){
+    public void increaseStarDust(int i){
         star_dust += i;
     }
 

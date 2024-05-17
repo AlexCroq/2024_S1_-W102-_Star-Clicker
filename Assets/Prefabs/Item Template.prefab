@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StarCardLoader, NewAssembly
-        m_MethodName: refreshContent
+        m_MethodName: refreshStarDustUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -538,7 +538,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StarCardLoader, NewAssembly
-        m_MethodName: refreshContent
+        m_MethodName: refreshStarDustUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -682,6 +682,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6737922104053058263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7070221968832843782}
+  - component: {fileID: 1446898586795665743}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7070221968832843782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737922104053058263}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -70.16818, y: -27.643234, z: -0.28096265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3913360537970330220}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1446898586795665743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737922104053058263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6277c05ba724df14f877c1e0b74b9415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7726770256781821981
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +898,7 @@ RectTransform:
   - {fileID: 8609424188659550443}
   - {fileID: 3175930439183663774}
   - {fileID: 3254618472560076167}
+  - {fileID: 7070221968832843782}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -917,7 +962,6 @@ MonoBehaviour:
   idTxt: {fileID: 1463878972589559386}
   purchaseBtn: {fileID: 9043426280048568382}
   sellBtn: {fileID: 4890529630825439919}
-  canvasPrefab: {fileID: 1311070852587327414, guid: 05f547cb80193d343b1a2ba86d73647e, type: 3}
 --- !u!114 &148446703012504442
 MonoBehaviour:
   m_ObjectHideFlags: 0

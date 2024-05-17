@@ -17,7 +17,7 @@ public class Clicker : MonoBehaviour
 
     public void Start()
     {
-        currentUser = UserManager.currentUser;
+        currentUser = UserDatabaseManager.Instance.GetCurrentUser();
 
     }
     public void Awake()

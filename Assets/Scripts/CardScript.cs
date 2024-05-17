@@ -19,27 +19,22 @@ public class CardScript : MonoBehaviour
    public Button sellBtn;
    private User currentUser;
 
-   public GameObject canvasPrefab;
-
-   private int priceMin=10000000;
-
-   private int priceMax;
-
 
     public void Awake(){
-        currentUser = UserManager.currentUser;
+        currentUser = UserDatabaseManager.Instance.GetCurrentUser();
         purchaseBtn.onClick.AddListener(OnPurchase);
         sellBtn.onClick.AddListener(OnSale);
    }
 
     public void OnPurchase(){
-      BuyStar(Int32.Parse(idTxt.text));
-      setCardData(Int32.Parse(idTxt.text));
+        BuyStar(Int32.Parse(idTxt.text));
+        setCardData(Int32.Parse(idTxt.text));
    }
 
     public void OnSale(){
-      SellStar(Int32.Parse(idTxt.text));
-      setCardData(Int32.Parse(idTxt.text));
+        setPrice(Int32.Parse(idTxt.text));
+        SellStar(Int32.Parse(idTxt.text));
+        setCardData(Int32.Parse(idTxt.text));
    }
 
     public void setCardData(int starID){
@@ -55,9 +50,9 @@ public class CardScript : MonoBehaviour
         }else{
             purchaseBtn.enabled = true;
             sellBtn.enabled = false;
+            setPrice(starID);
             sellBtn.gameObject.SetActive(false);
             purchaseBtn.gameObject.SetActive(true);
-            setPrice(starID);
             priceTxt.text = price.ToString();
         }
 
@@ -83,14 +78,14 @@ public class CardScript : MonoBehaviour
     public void BuyStar(int id){
     if(!currentUser.IsOwned(id) & currentUser.getStar_dust()>price){
         currentUser.AddStarIDList(id);
-        currentUser.setStar_dust(-price);
+        currentUser.increaseStarDust(-price);
         }
     }
 
     public void SellStar(int id){
     if(currentUser.IsOwned(id)){
         currentUser.RemoveStarIDList(id);
-        currentUser.setStar_dust((int)0.5*price);
+        currentUser.increaseStarDust((int)(0.5*price));
         }
     }
 

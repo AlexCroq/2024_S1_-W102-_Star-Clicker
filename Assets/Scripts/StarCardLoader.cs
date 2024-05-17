@@ -6,6 +6,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
+using Codice.CM.WorkspaceServer.DataStore.WkTree;
 
 public class StarCardLoader : MonoBehaviour
 {
@@ -25,10 +26,8 @@ public class StarCardLoader : MonoBehaviour
 
     void Start()
     {   
-        currentUser = UserManager.currentUser;
+        currentUser = UserDatabaseManager.Instance.GetCurrentUser();
         refreshContent();
-        
-        
     }
     public void refreshContent(){
         RemoveAllCards();
@@ -42,13 +41,13 @@ public class StarCardLoader : MonoBehaviour
             // Show inventory list
             starsIDList = currentUser.getStarIDList();
         }
-        totalHeight = 0f;
+        totalHeight = -70;
         foreach (int starID in starsIDList){
             GameObject card = Instantiate(cardPrefab, contentArea);
 
             // Set the position of the card
             RectTransform cardRectTransform = card.GetComponent<RectTransform>();
-            cardRectTransform.anchoredPosition = new Vector2(0f, -totalHeight);
+            cardRectTransform.anchoredPosition = new Vector2(0f, - totalHeight);
 
             CardScript cardScript = card.GetComponent<CardScript>();
             cardScript.setCardData(starID);
@@ -69,6 +68,9 @@ public class StarCardLoader : MonoBehaviour
         
     }
 
+    public void refreshStarDustUI(){
+        star_dustUI.text = $"Star dust :{currentUser.getStar_dust()}";
+    }
     private void OnCardClicked(int starID)
     {
         GameObject starCard = Instantiate(starInfoPrefab, transform.position, Quaternion.identity);
@@ -95,10 +97,7 @@ public class StarCardLoader : MonoBehaviour
         StarDataLoader sdl = new();
         List<Star> stars = sdl.LoadData();
         int fullList =0;
-        bool class1 = true;
-        bool class2 = true;
-        bool class3 = true;
-        bool class4 = true;
+        bool class1 = true, class2 = true, class3 = true, class4 = true;
         while (fullList!=4){
             int randomNumber = random.Next(1, 9111);
                 foreach(Star star in stars){
@@ -143,4 +142,5 @@ public class StarCardLoader : MonoBehaviour
    }
     currentUser.setStarPower(power);
    }
+
 }
