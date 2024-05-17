@@ -6,30 +6,29 @@ using PlasticPipe.PlasticProtocol.Messages;
 
 public class Clicker : MonoBehaviour
 {
-    public int power = 0;
-    public float powerPerSecond = 1.0f;
     public TMP_Text powerText;
+    public TMP_Text powerStar;
+
+    private User currentUser;
 
     private bool clicked = false;
     private bool actionPerformed;
-    private User user;
 
     void Start()
     {
-        user = UserDatabaseManager.Instance.GetUsers()[1];
-        Debug.Log(user.username);
+        currentUser = UserDatabaseManager.Instance.GetCurrentUser();
         StartCoroutine(WaitForClick());
     }
 
     void Update()
     {
-        powerText.text = "Total Star Dust: " + power;
+        powerText.text = "Total Star Dust: " + currentUser.getStar_dust();
+        powerStar.text = "Star power: " + (int)currentUser.getStarPower();
     }
 
     public void MainButtonPress()
     {
-        power++;
-        clicked = true;
+        currentUser.AddScore();
     }
 
     IEnumerator WaitForClick()
@@ -39,7 +38,7 @@ public class Clicker : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             if (!clicked && !actionPerformed)
             {
-                yield return UserDatabaseManager.Instance.UpdateUser(user.username,starDust:power);
+                yield return UserDatabaseManager.Instance.UpdateUser(currentUser,starDust:currentUser.star_dust);
                 actionPerformed = true;
             }
             else if (clicked)

@@ -7,6 +7,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Unity.Plastic.Newtonsoft.Json;
+using UnityEngine.SocialPlatforms;
 
 public class UserDatabaseManager : MonoBehaviour
 {
@@ -192,10 +193,19 @@ public class UserDatabaseManager : MonoBehaviour
         return users;
     }
 
-    public User getCurrentUser(){
+    public User GetCurrentUser(){
         return currentUser;
     }
 
+    public void setCurrentUser(string username){
+        foreach(User user in users){
+            if (user.username == username){
+                currentUser = user;
+                break;
+            }
+        }
+    }
+    
     public bool CheckPassword(string inputPassword, string hashedPassword) => HashPassword(inputPassword) == hashedPassword;
 
 }

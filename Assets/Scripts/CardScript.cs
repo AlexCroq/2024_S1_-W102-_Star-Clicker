@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Codice.Client.Common;
+using System.Data.Common;
+using System.Threading.Tasks;
 
 public class CardScript : MonoBehaviour
 {
@@ -16,27 +19,28 @@ public class CardScript : MonoBehaviour
    public Button sellBtn;
    private User currentUser;
 
-   public GameObject canvasPrefab;
 
     public void Awake(){
-        currentUser = UserManager.currentUser;
+        currentUser = UserDatabaseManager.Instance.GetCurrentUser();
         purchaseBtn.onClick.AddListener(OnPurchase);
         sellBtn.onClick.AddListener(OnSale);
    }
 
     public void OnPurchase(){
-      currentUser.BuyStar(id);
-      setCardData(id);
+        BuyStar(Int32.Parse(idTxt.text));
+        setCardData(Int32.Parse(idTxt.text));
    }
 
     public void OnSale(){
-      currentUser.SellStar(id);
-      setCardData(id);
+        setPrice(Int32.Parse(idTxt.text));
+        SellStar(Int32.Parse(idTxt.text));
+        setCardData(Int32.Parse(idTxt.text));
    }
 
     public void setCardData(int starID){
         var IsOwned = currentUser.IsOwned(starID);
         idTxt.text = starID.ToString();
+        id = Int32.Parse(idTxt.text);
         if(IsOwned){
             purchaseBtn.enabled = false;
             sellBtn.enabled = true;
@@ -46,9 +50,9 @@ public class CardScript : MonoBehaviour
         }else{
             purchaseBtn.enabled = true;
             sellBtn.enabled = false;
+            setPrice(starID);
             sellBtn.gameObject.SetActive(false);
             purchaseBtn.gameObject.SetActive(true);
-            setPrice(starID);
             priceTxt.text = price.ToString();
         }
 
@@ -62,12 +66,29 @@ public class CardScript : MonoBehaviour
         foreach (Star star in stars) {
             if (star.catalog_number == id){
                 flag = true;
-                price = id *61; // TODO change logic
+                price = (int)(star.size*10000);
             }
         }
+        
         if(!flag){
             price = -1;
         }
     }
+
+    public void BuyStar(int id){
+    if(!currentUser.IsOwned(id) & currentUser.getStar_dust()>price){
+        currentUser.AddStarIDList(id);
+        currentUser.increaseStarDust(-price);
+        }
+    }
+
+    public void SellStar(int id){
+    if(currentUser.IsOwned(id)){
+        currentUser.RemoveStarIDList(id);
+        currentUser.increaseStarDust((int)(0.5*price));
+        }
+    }
+
+
 
 }

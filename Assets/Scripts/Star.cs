@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 
   public class Star {
@@ -12,6 +13,8 @@ using UnityEngine;
     private readonly float dec_proper_motion;
     private bool toBeCollected = false;
 
+    public short magnitude;
+
     public Star(float catalog_number, double right_ascension, double declination, byte spectral_type,
                 byte spectral_index, short magnitude, float ra_proper_motion, float dec_proper_motion) {
       this.catalog_number = catalog_number;
@@ -19,6 +22,7 @@ using UnityEngine;
       this.declination = declination;
       this.ra_proper_motion = ra_proper_motion;
       this.dec_proper_motion = dec_proper_motion;
+      this.magnitude = magnitude;
 
       position = GetBasePosition();
       colour = SetColour(spectral_type, spectral_index);
@@ -97,4 +101,23 @@ using UnityEngine;
     public bool isToBeCollected(){
       return toBeCollected;
     }
+
+    public int getStarClass(){
+      if(size<0.05){
+        return 1;
+      }
+      else if(size<0.2 & size>0.05){
+        return 2;
+      }
+      else if(size<0.5 & size>0.2){
+        return 3;
+      }
+      else if(size>0.5){
+        return 4;
+      }
+      else{
+        return 0;
+      }
+    }
+    
   }
