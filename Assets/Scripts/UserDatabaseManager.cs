@@ -127,7 +127,7 @@ public class UserDatabaseManager : MonoBehaviour
             return builder.ToString();
         }
     }
-    public IEnumerator UpdateUser(string username, int? starDust = null, List<string> friendsList = null, List<string> starIDList = null)
+    public IEnumerator UpdateUser(string username, int? starDust = null, List<int> friendsList = null, List<int> starIDList = null)
     {
         // Create the payload dictionary
         Dictionary<string, object> payload = new Dictionary<string, object>
@@ -143,15 +143,18 @@ public class UserDatabaseManager : MonoBehaviour
         }
         if (friendsList != null)
         {
-            payload["friendsList"] = friendsList;
+            string friendsListText =  "[" + string.Join(", ", friendsList) + "]";
+            payload["friendsList"] = friendsListText;
         }
         if (starIDList != null)
         {
-            payload["starIDList"] = starIDList;
+            string starIDListText =  "[" + string.Join(", ", starIDList) + "]";
+            payload["starIDList"] = starIDListText;
         }
 
         // Serialize payload to JSON
         string jsonPayload = JsonConvert.SerializeObject(payload);
+        Debug.Log(jsonPayload);
 
         // Set up the request
         UnityWebRequest request = new UnityWebRequest(userPhpScriptUrl, "POST");

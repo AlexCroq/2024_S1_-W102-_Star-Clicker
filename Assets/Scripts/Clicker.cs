@@ -13,6 +13,7 @@ public class Clicker : MonoBehaviour
 
     private bool clicked = false;
     private bool actionPerformed;
+    public float powerPerSecond;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class Clicker : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             if (!clicked && !actionPerformed)
             {
-                yield return UserDatabaseManager.Instance.UpdateUser(currentUser,starDust:currentUser.star_dust);
+                yield return UserDatabaseManager.Instance.UpdateUser(currentUser.username,starDust:currentUser.star_dust);
                 actionPerformed = true;
             }
             else if (clicked)
