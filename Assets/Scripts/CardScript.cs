@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Codice.Client.Common;
 using System.Data.Common;
 using System.Threading.Tasks;
 
