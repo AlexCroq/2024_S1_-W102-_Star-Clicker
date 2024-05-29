@@ -44,7 +44,7 @@ public class ChallangeList : MonoBehaviour
             case MissionType.Friends:
                 return currentUser.getFriendIDList().Count >= mission.targetValue;
             case MissionType.Stardust:
-                return currentUser.getStar_dust() >= mission.targetValue;
+                return currentUser.getStar_dust() >= mission.targetValue;     // i dont't know if i use the correct variable
             default:
                 return false;
         }
@@ -53,15 +53,19 @@ public class ChallangeList : MonoBehaviour
     public void ClaimReward(int btnNo){
         missionsPanel[btnNo].doneButton.gameObject.SetActive(false);
         missionsPanel[btnNo].doneStatus.gameObject.SetActive(true);
+        currentUser.increaseStarDust(missionSO[btnNo].rewards);
     }
 
     public void updateStatus(){
         for(int i = 0 ; i < missionSO.Length;i++){
-            if(/*IsMissionCompleted(missionSO[i])*/ missionSO.targetValue < 100){
+            if(IsMissionCompleted(missionSO[i]) /*missionSO[i].targetValue < 100 this for testing caes*/){
                 missionsPanel[i].doneButton.gameObject.SetActive(true);
+                missionsPanel[i].ongoingStatus.gameObject.SetActive(false);
             }
         }
     }
+
+    
 
     
 
