@@ -64,7 +64,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.21f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scriptable Object\missionsSO.cs" />
     <Compile Include="Assets\Devion Games\Login System\Scripts\Runtime\Settings\Settings.cs" />
     <Compile Include="Assets\Devion Games\Login System\Scripts\Runtime\LoginManager.cs" />
     <Compile Include="Assets\Devion Games\Login System\Scripts\Runtime\UI\RegistrationWindow.cs" />

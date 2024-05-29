@@ -6,36 +6,61 @@ using UnityEngine.UI;
 public class ChallangeList : MonoBehaviour
 {
     
-    public Text missionDescriptionTxt;
     
-    private List<missions> missions;
-    public Button claimMission;
-    public Text doneStatus;
-    public Text ongoingStatus;
-    private User currentUser;
     
-    void Awake()
+    
+    
+    public User currentUser;
+    public MissionsSO[] missionSO;
+    public Missions[] missionsPanel;
+    
+    void Start()
     {
         currentUser = UserDatabaseManager.Instance.GetCurrentUser();
-        missions = new List<missions>{
-            new missions("Obtain 5 Stars", user => user.starIDList != null && user.starIDList.Count >= 5),
-            new missions("Obtain 10 Stars", user => user.starIDList != null && user.starIDList.Count >= 10),
-            new missions("Obtain 20 Stars", user => user.starIDList != null && user.starIDList.Count >= 20),
-            new missions("Obtain 100 Stars", user => user.starIDList != null && user.starIDList.Count >= 100),
-            new missions("Have 5 Friends", user => user.friendsList != null && user.friendsList.Count >= 5),
-            new missions("Have 10 Friends", user => user.friendsList != null && user.friendsList.Count >= 10),
-            new missions("Have 20 Friends", user => user.friendsList != null && user.friendsList.Count >= 20),
-            new missions("Have 100 Friends", user => user.friendsList != null && user.friendsList.Count >= 100),
-            new missions("Have 1000 Stardust", user => user.star_dust >= 1000),
-            new missions("Have 1500 Stardust", user => user.star_dust >= 1500),
-            new missions("Have 1600 Stardust", user => user.star_dust >= 1600)
-        };
+        LoadPanel();
+        updateStatus();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+    }
+
+    public void LoadPanel(){
+        for(int i  = 0 ; i < missionSO.Length; i++ ){
+           missionsPanel[i].descriptionTxt.text = missionSO[i].description;
+           missionsPanel[i].rewardTxt.text = missionSO[i].rewards.ToString();
+        }
+    }
+
+    private bool IsMissionCompleted(MissionsSO mission)
+    {
+        switch (mission.missionType)
+        {
+            case MissionType.Stars:
+                return currentUser.getStarIDList().Count>= mission.targetValue;
+            case MissionType.Friends:
+                return currentUser.getFriendIDList().Count >= mission.targetValue;
+            case MissionType.Stardust:
+                return currentUser.getStar_dust() >= mission.targetValue;
+            default:
+                return false;
+        }
+    }
+
+    public void ClaimReward(int btnNo){
+        missionsPanel[btnNo].doneButton.gameObject.SetActive(false);
+        missionsPanel[btnNo].doneStatus.gameObject.SetActive(true);
+    }
+
+    public void updateStatus(){
+        for(int i = 0 ; i < missionSO.Length;i++){
+            if(/*IsMissionCompleted(missionSO[i])*/ missionSO.targetValue < 100){
+                missionsPanel[i].doneButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     

@@ -45,6 +45,10 @@ public class User{
         return starIDList;
     }
 
+    public List<int> getFriendIDList(){
+        return friendsList;
+    }
+
         public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -95,4 +99,6 @@ public class User{
     public float getStarPower(){
         return starPower;
     }
+
+    
 }
