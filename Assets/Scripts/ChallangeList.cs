@@ -58,7 +58,7 @@ public class ChallangeList : MonoBehaviour
 
     public void updateStatus(){
         for(int i = 0 ; i < missionSO.Length;i++){
-            if(IsMissionCompleted(missionSO[i]) /*missionSO[i].targetValue < 100 this for testing caes*/){
+            if(/*IsMissionCompleted(missionSO[i])*/ missionSO[i].targetValue < 100 ){
                 missionsPanel[i].doneButton.gameObject.SetActive(true);
                 missionsPanel[i].ongoingStatus.gameObject.SetActive(false);
             }
