@@ -33,15 +33,19 @@ public class StarCardLoader : MonoBehaviour
         RemoveAllCards();
         refreshStarPower();
         star_dustUI.text = $"Star dust :{currentUser.getStar_dust()}";
+        int container_top = 0;
         if (starListType == 0){
             // Show shopping list
             starsIDList = RandomizeShop();
+            container_top = 70;
+
         }
         else if (starListType == 1){
             // Show inventory list
             starsIDList = currentUser.getStarIDList();
+            container_top = 131;
         }
-        totalHeight = -70;
+        totalHeight = -starsIDList.Count*container_top/4;
         foreach (int starID in starsIDList){
             GameObject card = Instantiate(cardPrefab, contentArea);
 
