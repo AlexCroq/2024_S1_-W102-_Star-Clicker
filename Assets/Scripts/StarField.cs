@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Codice.Client.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,33 +11,42 @@ public class StarField : MonoBehaviour {
   private List<Star> stars;
   private List<GameObject> starObjects;
   private Dictionary<int, GameObject> constellationVisible = new();
+  private User currentUser;
+  UserDatabaseManager  userDatabaseManager;
 
   private readonly int starFieldScale = 400;
 
   void Start() {
+    userDatabaseManager = UserDatabaseManager.Instance;
+    currentUser = userDatabaseManager.GetCurrentUser();
     StarDataLoader starLoader = new();
     stars = starLoader.LoadData();
     starObjects = new();
+
     foreach (Star star in stars) {
-      GameObject starObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
-      starObject.transform.parent = transform;
-      starObject.name = $"HR {star.catalog_number}";
-      starObject.transform.localPosition = star.position * starFieldScale;
-      starObject.transform.LookAt(transform.position);
-      starObject.transform.Rotate(0, 180, 0);
-      Material material = starObject.GetComponent<MeshRenderer>().material;
-      material.shader = Shader.Find("Unlit/StarShader");
-      material.SetFloat("_Size", Mathf.Lerp(starSizeMin, starSizeMax, star.size));
-      material.color = star.colour;
-      starObjects.Add(starObject);
+      if (currentUser.getStarIDList().Contains((int)star.catalog_number))
+      {
 
-      EventTrigger eventTrigger = starObject.AddComponent<EventTrigger>();
+        GameObject starObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        starObject.transform.parent = transform;
+        starObject.name = $"HR {star.catalog_number}";
+        starObject.transform.localPosition = star.position * starFieldScale;
+        starObject.transform.LookAt(transform.position);
+        starObject.transform.Rotate(0, 180, 0);
+        Material material = starObject.GetComponent<MeshRenderer>().material;
+        material.shader = Shader.Find("Unlit/StarShader");
+        material.SetFloat("_Size", Mathf.Lerp(starSizeMin, starSizeMax, star.size));
+        material.color = star.colour;
+        starObjects.Add(starObject);
 
-      // Add PointerClick event to trigger when the star is clicked
-      EventTrigger.Entry entry = new EventTrigger.Entry();
-      entry.eventID = EventTriggerType.PointerClick;
-      entry.callback.AddListener((data) => { OnStarClicked(star); });
-      eventTrigger.triggers.Add(entry);
+        EventTrigger eventTrigger = starObject.AddComponent<EventTrigger>();
+
+        // Add PointerClick event to trigger when the star is clicked
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) => { OnStarClicked(star); });
+        eventTrigger.triggers.Add(entry);
+      }
     }
   }
 
