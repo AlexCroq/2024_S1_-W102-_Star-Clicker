@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f130b7d835a6db94c9438ac8f2952402, type: 3}
   m_Name: Mission 1
   m_EditorClassIdentifier: 
+  targetValue: 1000
   description: Obtain 1000 star dusts
-  reward: 100
-  missionType: 0
+  rewards: 1000
+  missionType: 2
