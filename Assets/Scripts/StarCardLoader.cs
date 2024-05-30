@@ -83,8 +83,6 @@ public class StarCardLoader : MonoBehaviour
 
     }
 
-
-
     private void RemoveAllCards()
     {
         foreach (Transform child in contentArea)

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Data.Common;
-using PlasticPipe.Tube;
 using UnityEngine;
 using System.Text;
 
@@ -36,7 +35,7 @@ public class User{
     }
 
     public void AddScore(){
-        star_dust =star_dust + (int)starPower*10000000;
+        star_dust =star_dust + (int)starPower;
     }
 
     #endregion

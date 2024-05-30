@@ -1,28 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using PlasticPipe.PlasticProtocol.Messages;
-
 
 public class Clicker : MonoBehaviour
 {
-  
-    public float powerPerSecond = 1.0f;
     public TMP_Text powerText;
     public TMP_Text powerStar;
 
     private User currentUser;
 
-    public void Start()
+    private bool clicked = false;
+    private bool actionPerformed;
+    public float powerPerSecond;
+
+    void Start()
     {
         currentUser = UserDatabaseManager.Instance.GetCurrentUser();
-
-    }
-    public void Awake()
-    {
-        
+        StartCoroutine(WaitForClick());
     }
 
     void Update()
@@ -34,5 +29,23 @@ public class Clicker : MonoBehaviour
     public void MainButtonPress()
     {
         currentUser.AddScore();
+    }
+
+    IEnumerator WaitForClick()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.5f);
+            if (!clicked && !actionPerformed)
+            {
+                yield return UserDatabaseManager.Instance.UpdateUser(currentUser.username,starDust:currentUser.star_dust);
+                actionPerformed = true;
+            }
+            else if (clicked)
+            {
+                actionPerformed = false;
+                clicked = false;
+            }
+        }
     }
 }
