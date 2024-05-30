@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using System;
 using System.Security.Cryptography;
-using System.Text;
 using Unity.Plastic.Newtonsoft.Json;
+using System.Text;
 using UnityEngine.SocialPlatforms;
 
 public class UserDatabaseManager : MonoBehaviour

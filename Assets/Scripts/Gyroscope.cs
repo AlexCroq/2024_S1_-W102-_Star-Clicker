@@ -15,7 +15,7 @@ public class GyroControl : MonoBehaviour
     private Quaternion rot;
     private Vector2 lastTouchPosition;
     public float rotationSpeed = 1f;
-    
+
     private Quaternion calibratedCoordinates;
 
 
@@ -24,7 +24,7 @@ public class GyroControl : MonoBehaviour
         cameraContainer = new GameObject("Camera Container");
         cameraContainer.transform.position = transform.position;
         transform.SetParent(cameraContainer.transform);
-        endCalibrationButton.onClick.AddListener(SetCalibration);
+        endCalibrationButton.onClick.AddListener(() => SetCalibration(false));
         gyroEnabled = EnableGyro();
 
     }
@@ -37,16 +37,16 @@ public class GyroControl : MonoBehaviour
             gyro.enabled = true;
             Debug.Log(gyro.attitude);
             // cameraContainer.transform.rotation = GetFixedPoint();
-            rot = new Quaternion(0, 0, 1, 0);
+            // rot = new Quaternion(0, 0, 1, 0);
             return true;
         }
         return false;
     }
 
-    private void SetCalibration(){
+    private void SetCalibration(bool enabled){
         calibratedCoordinates = gyro.attitude;
-        calibrationMode = !calibrationMode;
-        endCalibrationButton.gameObject.SetActive(!calibrationMode);
+        calibrationMode = enabled;
+        endCalibrationButton.gameObject.SetActive(enabled);
     }
 
     private Quaternion GetFixedPoint(){
@@ -113,20 +113,15 @@ public class GyroControl : MonoBehaviour
         else{
     if (gyroEnabled)
             {   
-                transform.localRotation = gyro.attitude * rot;
-                // TODO sprint 2 add gyro calibration.
+                Quaternion gyroscope = gyro.attitude;
+                Quaternion currentRotation = CalibratedRotation(calibratedCoordinates, gyroscope);
+                cameraContainer.transform.rotation = currentRotation;
             }
         }
     }
 
-    public Vector3 CalibratedRotation(Vector3 coordinates, Vector3 gyroscope){
-        
-        return new Vector3(
-            gyroscope.x - coordinates.x,
-            gyroscope.y - coordinates.y,
-            90-(gyroscope.z - coordinates.z)
-        );
+    public Quaternion CalibratedRotation(Quaternion coordinates, Quaternion gyroscope)
+    {
+        return Quaternion.Inverse(coordinates) * gyroscope;
     }
-
-
 }
