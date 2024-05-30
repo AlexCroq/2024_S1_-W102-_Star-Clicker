@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using TMPro;
 using System;
 using System.Security.Cryptography;
-using System.Text;
 using Unity.Plastic.Newtonsoft.Json;
+using System.Text;
 using UnityEngine.SocialPlatforms;
 
 public class UserDatabaseManager : MonoBehaviour
 {
     private static string userPhpScriptUrl = "https://piraeiterie.fr/users.php";
+    private const string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
 
     private List<User> users = new List<User>();
     private static UserDatabaseManager instance;
@@ -59,7 +60,7 @@ public class UserDatabaseManager : MonoBehaviour
         // Loads all users from database
         // If app is scaling be careful with the use of this method.
         UnityWebRequest webRequest = UnityWebRequest.Get(userPhpScriptUrl);
-        webRequest.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
+        webRequest.SetRequestHeader("User-Agent", USER_AGENT);
 
         yield return webRequest.SendWebRequest();
 
@@ -82,7 +83,7 @@ public class UserDatabaseManager : MonoBehaviour
 
             UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(userPhpScriptUrl, jsonPayload);
             webRequest.SetRequestHeader("Content-Type", "application/json");
-            webRequest.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
+            webRequest.SetRequestHeader("User-Agent", USER_AGENT);
             yield return webRequest.SendWebRequest();
 
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
@@ -162,7 +163,7 @@ public class UserDatabaseManager : MonoBehaviour
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
+        request.SetRequestHeader("User-Agent", USER_AGENT);
 
         // Send the request and wait for the response
         yield return request.SendWebRequest();
