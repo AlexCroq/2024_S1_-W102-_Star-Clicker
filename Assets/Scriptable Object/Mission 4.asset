@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mission 4
   m_EditorClassIdentifier: 
   targetValue: 1
-  description: Obtain 10 star
+  description: Obtain 1 star
   rewards: 1000
   missionType: 0
+  isClaimed: 0

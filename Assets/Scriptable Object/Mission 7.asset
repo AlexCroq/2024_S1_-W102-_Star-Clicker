@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Have 1 friend
   rewards: 1000
   missionType: 1
+  isClaimed: 1
