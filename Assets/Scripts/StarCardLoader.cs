@@ -17,7 +17,7 @@ public class StarCardLoader : MonoBehaviour
 
     public List<int> starsIDList; // List of your star data
 
-    public float spacing = 10f; // Spacing between cards
+    public float spacing = 50f; // Spacing between cards
 
     public int starListType;
     private User currentUser;
