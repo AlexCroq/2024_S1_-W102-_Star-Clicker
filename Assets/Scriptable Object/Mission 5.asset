@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Obtain 20 star
   rewards: 1000
   missionType: 0
+  isClaimed: 0

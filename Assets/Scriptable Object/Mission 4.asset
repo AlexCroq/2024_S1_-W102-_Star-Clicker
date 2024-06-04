@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f130b7d835a6db94c9438ac8f2952402, type: 3}
   m_Name: Mission 4
   m_EditorClassIdentifier: 
-  targetValue: 10
+  targetValue: 1
   description: Obtain 10 star
   rewards: 1000
   missionType: 0

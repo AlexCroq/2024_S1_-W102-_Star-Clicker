@@ -13,6 +13,7 @@ public class ChallangeList : MonoBehaviour
     public User currentUser;
     public MissionsSO[] missionSO;
     public Missions[] missionsPanel;
+
     
     void Start()
     {
@@ -32,6 +33,18 @@ public class ChallangeList : MonoBehaviour
         for(int i  = 0 ; i < missionSO.Length; i++ ){
            missionsPanel[i].descriptionTxt.text = missionSO[i].description;
            missionsPanel[i].rewardTxt.text = missionSO[i].rewards.ToString();
+
+           if (missionSO[i].isClaimed)
+        {
+            missionsPanel[i].doneButton.gameObject.SetActive(false);
+            missionsPanel[i].doneStatus.gameObject.SetActive(true);
+            missionsPanel[i].ongoingStatus.gameObject.SetActive(false);
+        }
+        else
+        {
+            missionsPanel[i].doneButton.gameObject.SetActive(false);
+            missionsPanel[i].doneStatus.gameObject.SetActive(false);
+        }
         }
     }
 
@@ -53,15 +66,26 @@ public class ChallangeList : MonoBehaviour
     public void ClaimReward(int btnNo){
         missionsPanel[btnNo].doneButton.gameObject.SetActive(false);
         missionsPanel[btnNo].doneStatus.gameObject.SetActive(true);
+        missionSO[btnNo].isClaimed = true;
+
         currentUser.increaseStarDust(missionSO[btnNo].rewards);
     }
 
     public void updateStatus(){
         for(int i = 0 ; i < missionSO.Length;i++){
-            if(/*IsMissionCompleted(missionSO[i])*/ missionSO[i].targetValue < 100 ){
+           if (IsMissionCompleted(missionSO[i]))
+        {
+            if (!missionSO[i].isClaimed)
+            {
                 missionsPanel[i].doneButton.gameObject.SetActive(true);
                 missionsPanel[i].ongoingStatus.gameObject.SetActive(false);
             }
+            else
+            {
+                missionsPanel[i].doneButton.gameObject.SetActive(false);
+                missionsPanel[i].doneStatus.gameObject.SetActive(true);
+            }
+        }
         }
     }
 

@@ -14,6 +14,7 @@ public class Missions: MonoBehaviour
     public Image doneStatus;
     public Button doneButton;
     public TextMeshProUGUI ongoingStatus;
+    public bool isClaimed = false;
     
 
        

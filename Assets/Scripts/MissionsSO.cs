@@ -9,6 +9,7 @@ public class MissionsSO : ScriptableObject
    public string description;
     public int rewards;
     public MissionType missionType;
+    public bool isClaimed = false;
     
 }
 
