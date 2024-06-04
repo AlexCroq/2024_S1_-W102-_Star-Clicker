@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -77.1, y: -0.000019431}
-  m_SizeDelta: {x: 44.943, y: 47.3}
+  m_AnchoredPosition: {x: -403.8224, y: -0.2721}
+  m_SizeDelta: {x: 115.1058, y: 116.5152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8717720116445338724
 CanvasRenderer:
@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.4675, y: -4.325}
-  m_SizeDelta: {x: 43.3349, y: 21.35}
+  m_AnchoredPosition: {x: -22, y: -2.572}
+  m_SizeDelta: {x: 216.581, y: 55.1275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6571230396045260445
 CanvasRenderer:
@@ -169,15 +169,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -315,8 +315,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -31.472, y: -3.6745}
-  m_SizeDelta: {x: 35.335, y: 31.2509}
+  m_AnchoredPosition: {x: -255.63, y: -2.572}
+  m_SizeDelta: {x: 181.2863, y: 51.628}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4890529630825439919
 MonoBehaviour:
@@ -362,9 +362,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StarCardLoader, NewAssembly
-        m_MethodName: refreshStarDustUI
+      - m_Target: {fileID: 1446898586795665743}
+        m_TargetAssemblyTypeName: CardScript, NewAssembly
+        m_MethodName: OnSale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -404,11 +404,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 5
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -451,8 +451,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -31.472, y: -0.000012398}
-  m_SizeDelta: {x: 37.0568, y: 30}
+  m_AnchoredPosition: {x: -276, y: 0.00003624}
+  m_SizeDelta: {x: 91.2057, y: 64.6554}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5547190927699292701
 CanvasRenderer:
@@ -536,9 +536,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StarCardLoader, NewAssembly
-        m_MethodName: refreshStarDustUI
+      - m_Target: {fileID: 1446898586795665743}
+        m_TargetAssemblyTypeName: CardScript, NewAssembly
+        m_MethodName: OnPurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -582,8 +582,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80.836, y: 12.875}
-  m_SizeDelta: {x: 45.371, y: 13.049}
+  m_AnchoredPosition: {x: 400, y: 54.677}
+  m_SizeDelta: {x: 123.8445, y: 36.8069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4655579773866010910
 CanvasRenderer:
@@ -640,8 +640,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -723,9 +723,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6737922104053058263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6277c05ba724df14f877c1e0b74b9415, type: 3}
+  m_Script: {fileID: 11500000, guid: 5313e82e5e9f7f84aad0226e19aafe0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  price: 0
+  priceTxt: {fileID: 6548121543263715438}
+  idTxt: {fileID: 1463878972589559386}
+  purchaseBtn: {fileID: 9043426280048568382}
+  sellBtn: {fileID: 4890529630825439919}
 --- !u!1 &7726770256781821981
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,8 +766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82.089, y: -4.325}
-  m_SizeDelta: {x: 47.878, y: 21.35}
+  m_AnchoredPosition: {x: 364, y: -3.6745}
+  m_SizeDelta: {x: 235.709, y: 56.4222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7631444944487887806
 CanvasRenderer:
@@ -818,15 +824,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -903,8 +909,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 234.35352}
-  m_SizeDelta: {x: 212.0558, y: 47.2999}
+  m_AnchoredPosition: {x: -0.000017166, y: -0.000015259}
+  m_SizeDelta: {x: 985.9031, y: 146.1617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6249771794859408187
 CanvasRenderer:
